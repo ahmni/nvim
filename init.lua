@@ -108,7 +108,10 @@ return require('packer').startup(function(use)
       config = function()
        require("lualine").setup({ options = { theme = 'auto' } }) end
   }
-
+  use ({'m4xshen/hardtime.nvim', requires = { "MunifTanjim/nui.nvim"}})
+  require("hardtime").setup(
+   { max_time = 0 } -- max time to consider key repeat, disabled for now
+  )
   -- Diagnostics
   use({ "folke/trouble.nvim", requires = "nvim-tree/nvim-web-devicons"})
   -- Automatically set up your configuration after cloning packer.nvim
@@ -119,5 +122,6 @@ return require('packer').startup(function(use)
   require("diagnostics") -- Diagnostics
   require("telescope").load_extension("recent_files")
   require("keybinds")
+  require("set")
 end)
 
