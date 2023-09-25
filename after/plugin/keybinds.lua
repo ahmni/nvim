@@ -19,8 +19,7 @@ vim.keymap.set('v', '<leader>d', '\"_d')
 
 vim.keymap.set("n", "<leader>f", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-vim.keymap.set('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>',
-{})
+vim.keymap.set('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', {})
 vim.keymap.set('n', 'ex', ':Explore<enter>')
 
 vim.keymap.set('n', '<leader>w', ':update<CR>')
@@ -33,6 +32,18 @@ vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_d
 vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end)
 vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end)
 vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end)
+
+-- Buffers
+vim.keymap.set("n", "<leader>p", ":bprevious<cr>")
+vim.keymap.set("n", "<leader>n", ":bnext<cr>")
+vim.keymap.set("n", "<leader>bd", ":bdelete|bprevious<cr>")
+vim.keymap.set("n", "<leader>ba", ":%bd|e#|bd#<cr>")
+vim.keymap.set("n", "<leader>b", ":ls<CR>:b<Space>")
+
+-- nvim-tree
+vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<cr>")
+vim.keymap.set("n", "<leader>ff", ":NvimTreeFindFile<cr>")
+vim.keymap.set("n", "<leader>fc", ":NvimTreeCollapse<cr>")
 
 -- custom mappings in init.lua
 -- See `:help telescope.builtin`

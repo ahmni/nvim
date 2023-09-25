@@ -74,6 +74,12 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0" },
+    loaded = true,
+    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -109,6 +115,11 @@ _G.packer_plugins = {
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
   ["hardtime.nvim"] = {
     loaded = true,
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/hardtime.nvim",
@@ -119,10 +130,10 @@ _G.packer_plugins = {
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/theprimeagen/harpoon"
   },
-  ["hologram.nvim"] = {
+  ["indent-blankline.nvim"] = {
     loaded = true,
-    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/hologram.nvim",
-    url = "https://github.com/giusgad/hologram.nvim"
+    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -141,7 +152,7 @@ _G.packer_plugins = {
     url = "https://github.com/onsails/lspkind.nvim"
   },
   ["lualine.nvim"] = {
-    config = { "\27LJ\2\nZ\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\0\1\0\1\ntheme\tauto\nsetup\flualine\frequire\0" },
+    config = { "\27LJ\2\n�\3\0\0\a\0\25\0#6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\3\0005\4\4\0=\4\5\3=\3\a\0025\3\v\0004\4\3\0005\5\b\0005\6\t\0=\6\n\5>\5\1\4=\4\f\0035\4\r\0=\4\14\3=\3\15\0025\3\17\0005\4\16\0=\4\f\0034\4\0\0=\4\18\0034\4\0\0=\4\19\0034\4\0\0=\4\14\0035\4\20\0=\4\21\0035\4\22\0=\4\23\3=\3\24\2B\0\2\1K\0\1\0\ftabline\14lualine_z\1\2\0\0\ttabs\14lualine_y\1\3\0\0\16searchcount\19selectioncount\14lualine_c\14lualine_b\1\0\0\1\2\0\0\fbuffers\rsections\14lualine_x\1\3\0\0\rfiletype\15fileformat\14lualine_a\1\0\0\14separator\1\0\1\tleft\b\1\2\1\0\tmode\18right_padding\3\1\foptions\1\0\0\23section_separators\1\0\2\nright\b\tleft\b\1\0\2\25component_separators\6|\ntheme\tauto\nsetup\flualine\frequire\0" },
     loaded = true,
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
@@ -182,6 +193,11 @@ _G.packer_plugins = {
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -196,11 +212,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
-  },
-  ["pets.nvim"] = {
-    loaded = true,
-    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/pets.nvim",
-    url = "https://github.com/giusgad/pets.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -227,13 +238,23 @@ _G.packer_plugins = {
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
   },
+  ["vim-cool"] = {
+    loaded = true,
+    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/vim-cool",
+    url = "https://github.com/romainl/vim-cool"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-rhubarb"] = {
+    loaded = true,
+    path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
+    url = "https://github.com/tpope/vim-rhubarb"
+  },
   ["which-key.nvim"] = {
-    config = { "\27LJ\2\nt\0\0\3\0\a\0\0156\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\0\0009\0\1\0)\1,\1=\1\3\0006\0\4\0'\2\5\0B\0\2\0029\0\6\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\15timeoutlen\ftimeout\6o\bvim\0" },
+    config = { "\27LJ\2\np\0\0\3\0\a\0\0146\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\0\0009\0\1\0)\1,\1=\1\3\0006\0\4\0'\2\5\0B\0\2\0029\0\6\0B\0\1\1K\0\1\0\nsetup\14which-key\frequire\15timeoutlen\ftimeout\6o\bvim\0" },
     loaded = true,
     path = "/Users/ahmnii/.local/share/nvim/site/pack/packer/start/which-key.nvim",
     url = "https://github.com/folke/which-key.nvim"
@@ -241,36 +262,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
-<<<<<<< HEAD
 -- Config for: lualine.nvim
 time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\nZ\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\0\1\0\1\ntheme\tauto\nsetup\flualine\frequire\0", "config", "lualine.nvim")
+try_loadstring("\27LJ\2\n�\3\0\0\a\0\25\0#6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\3\0005\4\4\0=\4\5\3=\3\a\0025\3\v\0004\4\3\0005\5\b\0005\6\t\0=\6\n\5>\5\1\4=\4\f\0035\4\r\0=\4\14\3=\3\15\0025\3\17\0005\4\16\0=\4\f\0034\4\0\0=\4\18\0034\4\0\0=\4\19\0034\4\0\0=\4\14\0035\4\20\0=\4\21\0035\4\22\0=\4\23\3=\3\24\2B\0\2\1K\0\1\0\ftabline\14lualine_z\1\2\0\0\ttabs\14lualine_y\1\3\0\0\16searchcount\19selectioncount\14lualine_c\14lualine_b\1\0\0\1\2\0\0\fbuffers\rsections\14lualine_x\1\3\0\0\rfiletype\15fileformat\14lualine_a\1\0\0\14separator\1\0\1\tleft\b\1\2\1\0\tmode\18right_padding\3\1\foptions\1\0\0\23section_separators\1\0\2\nright\b\tleft\b\1\0\2\25component_separators\6|\ntheme\tauto\nsetup\flualine\frequire\0", "config", "lualine.nvim")
 time([[Config for lualine.nvim]], false)
--- Config for: neovim
-time([[Config for neovim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\27colorscheme rose-pine \bcmd\bvim\0", "config", "neovim")
-time([[Config for neovim]], false)
-=======
->>>>>>> 4e51883 (move after plugins to after/plugin)
 -- Config for: lsp_lines.nvim
 time([[Config for lsp_lines.nvim]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14lsp_lines\frequire\0", "config", "lsp_lines.nvim")
 time([[Config for lsp_lines.nvim]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
-try_loadstring("\27LJ\2\nt\0\0\3\0\a\0\0156\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\0\0009\0\1\0)\1,\1=\1\3\0006\0\4\0'\2\5\0B\0\2\0029\0\6\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\15timeoutlen\ftimeout\6o\bvim\0", "config", "which-key.nvim")
-time([[Config for which-key.nvim]], false)
-<<<<<<< HEAD
-=======
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\nZ\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\foptions\1\0\0\1\0\1\ntheme\tauto\nsetup\flualine\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
 -- Config for: neovim
 time([[Config for neovim]], true)
 try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\27colorscheme rose-pine \bcmd\bvim\0", "config", "neovim")
 time([[Config for neovim]], false)
->>>>>>> 4e51883 (move after plugins to after/plugin)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+try_loadstring("\27LJ\2\np\0\0\3\0\a\0\0146\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\0\0009\0\1\0)\1,\1=\1\3\0006\0\4\0'\2\5\0B\0\2\0029\0\6\0B\0\1\1K\0\1\0\nsetup\14which-key\frequire\15timeoutlen\ftimeout\6o\bvim\0", "config", "which-key.nvim")
+time([[Config for which-key.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
