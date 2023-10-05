@@ -20,7 +20,7 @@ lsp.setup_nvim_cmp({
   },
   mapping = {
     -- `Enter` key to confirm completion
-    ['<CR>'] = cmp.mapping.confirm(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true}),
     ['<D-u>'] = cmp.mapping.confirm({ select = true}),
 
     -- Ctrl+Space to trigger completion menu
