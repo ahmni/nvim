@@ -64,9 +64,6 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set("", "<space>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines"})
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>jf', function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ")});
-end)
 
 -- remove trailing sapces on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
