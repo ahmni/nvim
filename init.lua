@@ -215,7 +215,12 @@ return require('packer').startup(function(use)
   -- Diagnostics
   use({"folke/trouble.nvim", requires = "nvim-tree/nvim-web-devicons"})
   require("telescope").load_extension("recent_files")
-  use({'folke/noice.nvim', requires = 'MunifTanjim/nui.nvim'})
+  use({'folke/noice.nvim', requires =
+    {
+      {'MunifTanjim/nui.nvim'},
+      {"rcarriga/nvim-notify"}
+    }
+  })
   require("noice").setup({
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

@@ -35,6 +35,9 @@ vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<cr>")
 vim.keymap.set("n", "<leader>ff", ":NvimTreeFindFile<cr>")
 vim.keymap.set("n", "<leader>fc", ":NvimTreeCollapse<cr>")
 
+-- nvim-notify
+vim.keymap.set('n', '<leader>mc', function () require('notify').dismiss() end, { desc = "[M]essage [C]lose" })
+
 -- custom mappings in init.lua
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
