@@ -80,7 +80,7 @@ return require('packer').startup(function(use)
   }
 
   use {
-    "nvim-telescope/telescope.nvim", branch = '0.1.x',
+    "nvim-telescope/telescope.nvim",
     requires = {
       {'nvim-lua/plenary.nvim'},
       {'nvim-tree/nvim-web-devicons'}
@@ -105,6 +105,19 @@ return require('packer').startup(function(use)
     end
   }
 
+  require('telescope').setup({
+    defaults = vim.tbl_extend(
+      "force",
+      require('telescope.themes').get_dropdown(), {
+        mappings = {
+          n = {
+            ['<C-k>'] = 'preview_scrolling_right',
+            ['<C-f>'] = 'preview_scrolling_left'
+          }
+        }
+      }),
+    })
+
   use({"smartpde/telescope-recent-files"})
   -- colorscheme
   -- use {'AlexvZyl/nordic.nvim', config = function() vim.cmd [[colorscheme nordic]] end,}
@@ -126,12 +139,37 @@ return require('packer').startup(function(use)
           lualine_x = {'filetype', 'fileformat'},
         },
         tabline = {
-          lualine_a = {'buffers'},
+          lualine_a = {
+            {
+              'tabs',
+              mode = 1,
+              fmt = function(name, context)
+                -- Show + if buffer is modified in tab
+                local buflist = vim.fn.tabpagebuflist(context.tabnr)
+                local winnr = vim.fn.tabpagewinnr(context.tabnr)
+                local bufnr = buflist[winnr]
+                local mod = vim.fn.getbufvar(bufnr, '&mod')
+                local file = vim.api.nvim_buf_get_name(bufnr)
+                if type(file) == 'string' then
+                  file = file:gsub('%%', '%%%%')
+                end
+
+                local icon, _ = require('nvim-web-devicons').get_icon(file, vim.fn.expand('#' .. bufnr .. ':e'))
+                if icon then
+                  return icon .. ' ' .. name .. (mod == 1 and ' ●' or '')
+                end
+
+                return name .. (mod == 1 and ' ●' or '')
+              end
+            }
+          },
           lualine_b = {},
           lualine_c = {},
           lualine_x = {},
           lualine_y = {'searchcount', 'selectioncount'},
-          lualine_z = {'tabs'}
+          lualine_z = {
+
+          }
         }
       })
     end
@@ -145,10 +183,6 @@ return require('packer').startup(function(use)
   }
 
   use 'romainl/vim-cool'
-  use ({'m4xshen/hardtime.nvim', requires = { "MunifTanjim/nui.nvim"}})
-  require("hardtime").setup(
-  { max_time = 0 } -- max time to consider key repeat, disabled for now
-  )
 
   use 'nvim-tree/nvim-tree.lua'
   require('nvim-tree').setup({
@@ -180,12 +214,13 @@ return require('packer').startup(function(use)
   }
   -- Diagnostics
   use({ "folke/trouble.nvim", requires = "nvim-tree/nvim-web-devicons"})
+  require("telescope").load_extension("recent_files")
+  require('keybinds')
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()
   end
 
-  require("telescope").load_extension("recent_files")
 end)
 
