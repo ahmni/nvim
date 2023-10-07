@@ -25,11 +25,10 @@ vim.keymap.set('n', 'ex', ':Explore<enter>')
 vim.keymap.set('n', '<leader>w', ':update<CR>')
 
 -- Buffers
-vim.keymap.set("n", "<leader>p", ":bprevious<cr>")
-vim.keymap.set("n", "<leader>n", ":bnext<cr>")
-vim.keymap.set("n", "<leader>bd", ":bdelete|bprevious<cr>")
-vim.keymap.set("n", "<leader>ba", ":%bd|e#|bd#<cr>")
-vim.keymap.set("n", "<leader>b", ":ls<CR>:b<Space>")
+vim.keymap.set('n', '<leader>tn', ':tabnew %<CR>', { desc = "[T]ab [N]ew" })
+vim.keymap.set('n', '<leader>tf', ':tabnew ', { desc = "[T]ab New [F]ile" })
+vim.keymap.set('n', '<leader>tc', ':tabc<CR>', { desc = "[T]ab [C]lose" })
+vim.keymap.set('n', '<leader>to', ':tabo<CR>', { desc = "[T]ab Close [O]thers" })
 
 -- nvim-tree
 vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<cr>")
