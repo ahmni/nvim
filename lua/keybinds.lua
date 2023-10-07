@@ -1,7 +1,6 @@
 -- Keybinds
 
 Keymap = vim.api.nvim_set_keymap
-vim.g.mapleader = " "
 
 Keymap('i', 'jj', '<Esc>', {})
 
