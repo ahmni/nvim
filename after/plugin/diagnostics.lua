@@ -41,9 +41,11 @@ require("trouble").setup({
 })
 
 -- Mappings
-vim.api.nvim_set_keymap("n", "<Leader>xx", "<Cmd>Trouble<CR>", {} )
-vim.api.nvim_set_keymap("n", "<Leader>xw", "<Cmd>Trouble workspace_diagnostics<CR>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<Leader>xd", "<Cmd>Trouble document_diagnostics<CR>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<Leader>xl", "<Cmd>Trouble loclist<CR>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<Leader>xq", "<Cmd>Trouble quickfix<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xx", function() require("trouble").open() end, { desc = '[X] [X] Trouble' })
+vim.keymap.set("n", "<leader>xc", function() require("trouble").close() end, { desc = '[X] [C]lose Diag'})
+vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end, { desc = '[W]orkspace Diag' })
+vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_diagnostics") end, { desc = '[D]ocument Diag' })
+vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end, { desc = '[Q]uick Diag' })
+vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end, { desc = '[L]ocation List' })
+vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end, { desc = '[G]oto [R]eferences' })
 

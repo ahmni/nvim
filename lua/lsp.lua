@@ -21,16 +21,15 @@ lsp.setup_nvim_cmp({
   mapping = {
     -- `Enter` key to confirm completion
     ['<CR>'] = cmp.mapping.confirm({ select = true}),
-    ['<D-u>'] = cmp.mapping.confirm({ select = true}),
 
     -- Ctrl+Space to trigger completion menu
     ['<C-Space>'] = cmp.mapping.complete(),
 
-    ['<D-e>'] = cmp.mapping.abort(),
+    ['<C-e>'] = cmp.mapping.abort(),
 
     -- Navigate between snippet placeholder
-    ['<D-n>'] = cmp.mapping.select_next_item(),
-    ['<D-b>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-b>'] = cmp.mapping.select_prev_item(),
   },
   formatting = {
     format = lspkind.cmp_format({
