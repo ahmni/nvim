@@ -19,7 +19,7 @@ require('lazy').setup('plugins')
 require('lsp')
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "java", "lua", "vim", "proto", 'typescript', 'javascript', 'cpp', 'tsx'},
+  ensure_installed = { "lua", "vim", 'typescript', 'tsx'},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -56,25 +56,6 @@ require('telescope').setup({
 })
 
 require('gitsigns').setup()
-require('nvim-tree').setup({
-  renderer = {
-    special_files = {},
-    icons = {
-      show = {
-        folder_arrow = false,
-      },
-      glyphs = {
-        default = "",
-        folder = {
-          default = "",
-          open = "",
-          empty = "",
-          empty_open = "",
-        },
-      },
-    },
-  }
-})
 
 require("noice").setup({
   lsp = {
