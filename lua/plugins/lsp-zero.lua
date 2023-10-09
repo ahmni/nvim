@@ -10,7 +10,7 @@ return {
   },
   {
       'williamboman/mason.nvim',
-      lazy = false, -- subject to change
+      cmd = 'Mason',
       config = true
   },
   {
@@ -20,7 +20,6 @@ return {
         {'L3MON4D3/LuaSnip'},
         {'hrsh7th/cmp-buffer'},
         {'hrsh7th/cmp-path'},
-        {'saadparwaiz1/cmp_luasnip'},
       },
       config = function ()
         local lsp = require('lsp-zero')
@@ -38,8 +37,8 @@ return {
           },
           sources = {
             {name = 'path'},
+            {name = 'buffer'},
             {name = 'nvim_lsp'},
-            {name = 'nvim_lua'},
           },
           mapping = {
             -- `Enter` key to confirm completion
@@ -69,7 +68,6 @@ return {
       event = {'BufReadPre', 'BufNewFile'},
       dependencies = {
         {'hrsh7th/cmp-nvim-lsp'},
-        {'hrsh7th/cmp-nvim-lua'},
         {'williamboman/mason-lspconfig.nvim'}, -- Optional
       },
       config = function ()
