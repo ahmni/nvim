@@ -88,7 +88,6 @@ return {
     end
   },
   'romainl/vim-cool',
-  'nvim-tree/nvim-tree.lua',
   -- Easy commenting out visual blocks
   {
     'numToStr/Comment.nvim',
