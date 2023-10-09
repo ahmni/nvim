@@ -3,11 +3,10 @@ return {
     keys = {
       {"<leader>gs", vim.cmd.Git, desc = "[G]it [Status" }
     },
+    dependencies = {
+      'tpope/vim-rhubarb',
+    },
     cmd = 'G'
-  },
-  {
-    'tpope/vim-rhubarb',
-    cmd = 'GBrowse',
   },
   {
     event = 'BufRead *.*',

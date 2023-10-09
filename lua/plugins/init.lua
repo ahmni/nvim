@@ -1,7 +1,5 @@
 return {
-  -- LSP
-  "onsails/lspkind.nvim",
-  'mfussenegger/nvim-jdtls',
+  {'mfussenegger/nvim-jdtls', event = 'BufRead *.java'},
   {
     "nvim-treesitter/nvim-treesitter", build = ':TSUpdate',
     event = 'BufRead',

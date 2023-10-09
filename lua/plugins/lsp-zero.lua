@@ -20,6 +20,7 @@ return {
         {'L3MON4D3/LuaSnip'},
         {'hrsh7th/cmp-buffer'},
         {'hrsh7th/cmp-path'},
+        {"onsails/lspkind.nvim"},
       },
       config = function ()
         local lsp = require('lsp-zero')
