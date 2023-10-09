@@ -5,6 +5,7 @@ return {
       char = "│",
     },
   },
+  event = 'BufEnter',
   config = function ()
     require("ibl").setup({
       indent = {
@@ -12,6 +13,6 @@ return {
       },
       scope = {highlight = 'Label'}
     })
-  end
+  end,
 }
 

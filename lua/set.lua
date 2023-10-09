@@ -1,4 +1,3 @@
-vim.cmd [[colorscheme rose-pine]]
 
 vim.opt["tabstop"] = 2
 vim.opt["shiftwidth"] = 2

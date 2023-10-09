@@ -20,5 +20,6 @@ return {
         },
       }
     })
-  end
+  end,
+  cmd = "NvimTreeToggle",
 }
