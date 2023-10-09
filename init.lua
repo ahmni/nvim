@@ -13,6 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
+vim.loader.enable()
 
 local config = {
   defaults = {
@@ -20,8 +21,8 @@ local config = {
   }
 }
 
-require('lazy').setup('plugins', config)
-
-require('lsp')
 require('set')
 require('keybinds')
+
+require('lazy').setup('plugins', config)
+
