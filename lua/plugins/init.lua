@@ -3,7 +3,6 @@ return {
   "onsails/lspkind.nvim",
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
     dependencies = {
       -- LSP Support
       {'neovim/nvim-lspconfig'},             -- Required
@@ -18,7 +17,6 @@ return {
       {'hrsh7th/cmp-nvim-lsp'}, -- Required
       {'hrsh7th/cmp-nvim-lua'}, -- Required
       {'L3MON4D3/LuaSnip'},     -- Required
-      {'rafamadriz/friendly-snippets'},
     }
   },
   'mfussenegger/nvim-jdtls',
