@@ -20,6 +20,7 @@ return {
       {'L3MON4D3/LuaSnip'},
       {'hrsh7th/cmp-buffer'},
       {'hrsh7th/cmp-path'},
+      {'hrsh7th/cmp-nvim-lsp-signature-help'},
       {"onsails/lspkind.nvim"},
     },
     config = function ()
@@ -83,14 +84,15 @@ return {
         vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+        vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
         vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("v", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
         vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("i", "<C-CR>", function() vim.lsp.buf.signature_help() end, opts)
+        vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
+        vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
         -- disable semantic highlighting
         -- client.server_capabilities.semanticTokensProvider = nil
       end)

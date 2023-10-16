@@ -6,7 +6,8 @@ return {
   },
   event = 'VeryLazy',
   keys = {
-    { '<leader>mc', function () require('notify').dismiss() end, desc = "[M]essage [C]lose" }
+    { '<leader>mc', function () require('notify').dismiss() end, desc = "[M]essage [C]lose" },
+    { '<leader>mh', vim.cmd.Noice, desc = "[M]essage [H]istory" }
   },
   config = function ()
     require("noice").setup({
@@ -19,6 +20,23 @@ return {
         },
         hover = { enabled = false},
         signature = { enabled = false},
+      },
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            kind = "search_count",
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "written",
+          },
+          opts = { skip = true },
+        },
       },
       -- you can enable a preset for easier configuration
       presets = {
