@@ -5,7 +5,7 @@ return {
       char = "│",
     },
   },
-  event = 'BufRead *.*',
+  event = 'BufRead',
   config = function ()
     require("ibl").setup({
       indent = {

@@ -26,11 +26,6 @@ vim.keymap.set('n', '<leader>tf', ':tabnew ', { desc = "[T]ab New [F]ile" })
 vim.keymap.set('n', '<leader>tc', '<cmd>tabc<CR>', { desc = "[T]ab [C]lose" })
 vim.keymap.set('n', '<leader>to', '<cmd>tabo<CR>', { desc = "[T]ab Close [O]thers" })
 
--- nvim-tree
-vim.keymap.set("n", "<leader>ft", "<cmd>NvimTreeToggle<cr>")
-vim.keymap.set("n", "<leader>ff", "<cmd>NvimTreeFindFile<cr>")
-vim.keymap.set("n", "<leader>fc", "<cmd>NvimTreeCollapse<cr>")
-
 -- remove trailing sapces on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },

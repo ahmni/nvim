@@ -39,8 +39,8 @@ return {
         },
         sources = {
           {name = 'path'},
-          {name = 'buffer'},
           {name = 'nvim_lsp'},
+          {name = 'buffer'},
         },
         mapping = {
           -- `Enter` key to confirm completion
@@ -80,6 +80,12 @@ return {
         local opts = {buffer = bufnr, remap = false}
         lsp.default_keymaps({buffer = bufnr})
 
+        -- esLint AutoFormatting
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+          command = "EslintFixAll",
+        })
+
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -105,11 +111,10 @@ return {
             local lua_opts = lsp.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
           end,
-        }
+       }
       })
 
-
-    end
+   end
   },
   {'mfussenegger/nvim-jdtls', event = 'BufRead *.java'},
 }
