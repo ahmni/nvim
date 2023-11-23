@@ -6,6 +6,8 @@ return {
       -- Disable automatic setup, we are doing it manually
       vim.g.lsp_zero_extend_cmp = 0
       vim.g.lsp_zero_extend_lspconfig = 0
+      -- Allow noice to control float border
+      vim.g.lsp_zero_ui_float_border = 0
     end
   },
   {
@@ -106,6 +108,17 @@ return {
         -- disable semantic highlighting
         -- client.server_capabilities.semanticTokensProvider = nil
       end)
+
+      lsp.format_on_save({
+        format_opts = {
+          async = false,
+          timeout_ms = 10000,
+        },
+        servers = {
+          ['clangd'] = { 'cpp', 'c' },
+          ['lua_ls'] = { 'lua' }
+        }
+      })
 
       require('mason-lspconfig').setup({
         handlers = {
