@@ -1,8 +1,9 @@
 return {
-  "nvim-treesitter/nvim-treesitter", build = ':TSUpdate',
+  "nvim-treesitter/nvim-treesitter",
+  build = ':TSUpdate',
   event = 'BufRead',
-  config = function ()
-    require'nvim-treesitter.configs'.setup {
+  config = function()
+    require 'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
       ensure_installed = { "lua", "vim", 'typescript', 'tsx', "regex" },
 
@@ -24,7 +25,7 @@ return {
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = {'typescript', 'tsx', 'javascript', 'jsx'}
+        additional_vim_regex_highlighting = { 'typescript', 'tsx', 'javascript', 'jsx' }
       },
 
       indent = {

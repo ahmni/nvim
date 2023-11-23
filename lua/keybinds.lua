@@ -15,8 +15,7 @@ vim.keymap.set('v', '<leader>d', '\"_d')
 
 vim.keymap.set("n", "<leader>f", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-vim.keymap.set('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', {})
-vim.keymap.set('n', 'ex', '<cmd>Explore<enter>')
+vim.keymap.set('n', '<space>e', '<cmd>Explore<enter>')
 
 vim.keymap.set('n', '<leader>w', '<cmd>update<CR>')
 
@@ -31,4 +30,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 })
-

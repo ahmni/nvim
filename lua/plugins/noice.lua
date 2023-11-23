@@ -1,15 +1,16 @@
 return {
-  'folke/noice.nvim', dependencies =
+  'folke/noice.nvim',
+  dependencies =
   {
-    {'MunifTanjim/nui.nvim'},
-    {"rcarriga/nvim-notify"}
+    { 'MunifTanjim/nui.nvim' },
+    { "rcarriga/nvim-notify" }
   },
   event = 'VeryLazy',
   keys = {
-    { '<leader>mc', function () require('notify').dismiss() end, desc = "[M]essage [C]lose" },
-    { '<leader>mh', vim.cmd.Noice, desc = "[M]essage [H]istory" }
+    { '<leader>mc', function() require('notify').dismiss() end,  desc = "[M]essage [C]lose" },
+    { '<leader>mh', vim.cmd.Noice,                               desc = "[M]essage [H]istory" }
   },
-  config = function ()
+  config = function()
     require("noice").setup({
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins **Treesitter**
@@ -18,8 +19,8 @@ return {
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
-        hover = { enabled = false},
-        signature = { enabled = false},
+        hover = { enabled = false },
+        signature = { enabled = false },
       },
       routes = {
         {
@@ -40,13 +41,12 @@ return {
       },
       -- you can enable a preset for easier configuration
       presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false,       -- add a border to hover docs and signature help
       },
     })
   end
 }
-

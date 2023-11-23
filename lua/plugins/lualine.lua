@@ -1,5 +1,6 @@
 return {
-  'nvim-lualine/lualine.nvim', dependencies =
+  'nvim-lualine/lualine.nvim',
+  dependencies =
   { 'nvim-tree/nvim-web-devicons', opt = true },
   event = 'VeryLazy',
   config = function()
@@ -13,7 +14,7 @@ return {
         lualine_a = {
           { 'mode', separator = { left = '' }, right_padding = 1 },
         },
-        lualine_x = {'filetype', 'fileformat'},
+        lualine_x = { 'filetype', 'fileformat' },
       },
       tabline = {
         lualine_a = {
@@ -43,7 +44,7 @@ return {
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
-        lualine_y = {'searchcount', 'selectioncount'},
+        lualine_y = { 'searchcount', 'selectioncount' },
         lualine_z = {}
       }
     })
