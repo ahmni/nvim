@@ -6,6 +6,7 @@ return {
     { "smartpde/telescope-recent-files" },
     { "nvim-telescope/telescope-ui-select.nvim" }
   },
+  cmd = "Telescope",
   keys = {
     -- See `:help telescope.builtin`
     { '<leader>?',       function() require('telescope.builtin').oldfiles() end, desc = '[?] Find recently opened files' },
