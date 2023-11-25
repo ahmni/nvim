@@ -3,7 +3,8 @@ return {
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-tree/nvim-web-devicons' },
-    { "smartpde/telescope-recent-files" }
+    { "smartpde/telescope-recent-files" },
+    { "nvim-telescope/telescope-ui-select.nvim" }
   },
   keys = {
     -- See `:help telescope.builtin`
@@ -41,5 +42,6 @@ return {
         }),
     })
     require("telescope").load_extension("recent_files")
+    require("telescope").load_extension("ui-select")
   end
 }

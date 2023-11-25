@@ -18,7 +18,12 @@ vim.loader.enable()
 local config = {
   defaults = {
     lazy = true
-  }
+  },
+  debug = false,
+  profiling = {
+    loader = false,
+    require = false,
+  },
 }
 
 require('set')

@@ -86,9 +86,14 @@ return {
       lsp.on_attach(function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
         -- esLint AutoFormatting
+        -- vim.api.nvim_create_autocmd("BufWritePre", {
+        --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+        --   command = "EslintFixAll",
+        -- })
+        -- Neoformat AutoFormatting
         vim.api.nvim_create_autocmd("BufWritePre", {
           pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-          command = "EslintFixAll",
+          command = "Neoformat",
         })
 
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -116,7 +121,7 @@ return {
         },
         servers = {
           ['clangd'] = { 'cpp', 'c' },
-          ['lua_ls'] = { 'lua' }
+          ['lua_ls'] = { 'lua' },
         }
       })
 

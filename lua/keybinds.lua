@@ -19,6 +19,8 @@ vim.keymap.set('n', '<space>e', '<cmd>Explore<enter>')
 
 vim.keymap.set('n', '<leader>w', '<cmd>update<CR>')
 
+vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
+
 -- Buffers
 vim.keymap.set('n', '<leader>tn', '<cmd>tabnew %<CR>', { desc = "[T]ab [N]ew" })
 vim.keymap.set('n', '<leader>tf', ':tabnew ', { desc = "[T]ab New [F]ile" })
@@ -26,7 +28,7 @@ vim.keymap.set('n', '<leader>tc', '<cmd>tabc<CR>', { desc = "[T]ab [C]lose" })
 vim.keymap.set('n', '<leader>to', '<cmd>tabo<CR>', { desc = "[T]ab Close [O]thers" })
 
 -- remove trailing sapces on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
+--vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--  pattern = { "*" },
+--  command = [[%s/\s\+$//e]],
+--})

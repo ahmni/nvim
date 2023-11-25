@@ -12,27 +12,51 @@ return {
       },
       sections = {
         lualine_a = {
-          { 'mode', separator = { left = '' }, right_padding = 1 },
+          { 'mode', right_padding = 1 },
         },
-        lualine_x = { 'filetype', 'fileformat' },
+        lualine_b = {
+          'branch', 'diff', 'diagnostics'
+        },
+        lualine_c = {
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          {
+            'filename',
+            path = 4,
+            symbols = {
+              modified = '●', -- Text to show when the file is modified.
+              readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
+              unnamed = '', -- Text to show for unnamed buffers.
+              newfile = '[New]', -- Text to show for newly created file before first write
+            }
+          }
+        },
+        lualine_x = {
+          {
+            require("noice").api.status.command.get,
+            cond = require("noice").api.status.command.has,
+            color = { fg = "#f6c177" },
+          },
+          'fileformat',
+        },
       },
       tabline = {
         lualine_a = {
           {
             'tabs',
             mode = 1,
+            max_length = vim.o.columns / 2,
+            show_modified_status = false,
+            tabs_color = {
+              active = 'lualine_a_normal',
+              inactive = 'lualine_a_inactive',
+            },
             fmt = function(name, context)
               -- Show + if buffer is modified in tab
               local buflist = vim.fn.tabpagebuflist(context.tabnr)
               local winnr = vim.fn.tabpagewinnr(context.tabnr)
               local bufnr = buflist[winnr]
               local mod = vim.fn.getbufvar(bufnr, '&mod')
-              local file = vim.api.nvim_buf_get_name(bufnr)
-              if type(file) == 'string' then
-                file = file:gsub('%%', '%%%%')
-              end
-
-              local icon, _ = require('nvim-web-devicons').get_icon(file, vim.fn.expand('#' .. bufnr .. ':e'))
+              local icon, _ = require('nvim-web-devicons').get_icon_by_filetype(vim.bo.filetype)
               if icon then
                 return icon .. ' ' .. name .. (mod == 1 and ' ●' or '')
               end

@@ -9,6 +9,20 @@ vim.opt.colorcolumn = "80"
 vim.opt.smartindent = true
 vim.opt.wrap = false
 
+-- For EngineGoneRogue
+local SetTabWidth = function(num)
+  vim.opt.tabstop = num
+  vim.opt.shiftwidth = num
+  vim.opt.softtabstop = num
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'cpp' },
+  callback = function()
+    SetTabWidth(4)
+  end,
+})
+
 -- undotree
 vim.opt.swapfile = false
 vim.opt.backup = false

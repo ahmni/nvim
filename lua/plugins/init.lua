@@ -1,7 +1,6 @@
 return {
   {
-    'romainl/vim-cool', lazy = false
+    'romainl/vim-cool',
+    event = 'BufReadPost',
   },
 }
-
-
