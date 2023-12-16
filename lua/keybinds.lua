@@ -13,11 +13,11 @@ vim.keymap.set('n', '<leader>Y', '\"+Y')
 vim.keymap.set('n', '<leader>d', '\"_d')
 vim.keymap.set('v', '<leader>d', '\"_d')
 
-vim.keymap.set("n", "<leader>f", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[R]eplace Word " })
 
-vim.keymap.set('n', '<space>e', '<cmd>Explore<enter>')
+vim.keymap.set('n', '<space>e', '<cmd>Explore<enter>', { desc = "open [E]xplorer" })
 
-vim.keymap.set('n', '<leader>w', '<cmd>update<CR>')
+vim.keymap.set('n', '<leader>w', '<cmd>update<CR>', { desc = "[W]rite file" })
 
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 
@@ -29,9 +29,3 @@ vim.keymap.set('n', '<leader>tc', '<cmd>tabc<CR>', { desc = "[T]ab [C]lose" })
 vim.keymap.set('n', '<leader>to', '<cmd>tabo<CR>', { desc = "[T]ab Close [O]thers" })
 vim.keymap.set('n', 'H', 'gt', { desc = "go to left tab" })
 vim.keymap.set('n', 'F', 'gT', { desc = "go to right tab" })
-
--- remove trailing sapces on save
---vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---  pattern = { "*" },
---  command = [[%s/\s\+$//e]],
---})
