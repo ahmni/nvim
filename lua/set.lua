@@ -17,7 +17,7 @@ local SetTabWidth = function(num)
 end
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'cpp' },
+  pattern = { 'cpp', 'java' },
   callback = function()
     SetTabWidth(4)
   end,

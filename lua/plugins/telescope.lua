@@ -33,15 +33,19 @@ return {
     require('telescope').setup({
       defaults = vim.tbl_extend(
         "force",
-        require('telescope.themes').get_dropdown(), {
+        require('telescope.themes').get_dropdown(),
+        {
           mappings = {
             n = {
               ['<C-k>'] = 'preview_scrolling_right',
-              ['<C-f>'] = 'preview_scrolling_left'
-            }
-          }
+              ['<C-f>'] = 'preview_scrolling_left',
+              ["<Tab>"] = require("telescope.actions").select_tab_drop
+            },
+            i = { ["<Tab>"] = require("telescope.actions").select_tab_drop }
+          },
         }),
     })
+
     require("telescope").load_extension("recent_files")
     require("telescope").load_extension("ui-select")
   end

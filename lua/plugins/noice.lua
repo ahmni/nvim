@@ -38,6 +38,13 @@ return {
           },
           opts = { skip = true },
         },
+        {
+          view = "mini",
+          filter = {
+            mode = "i",
+          },
+          opts = { skip = true },
+        },
       },
       -- you can enable a preset for easier configuration
       presets = {

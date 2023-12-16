@@ -24,7 +24,7 @@ return {
         dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
         dashboard.button("r", " " .. " Recent files", "<cmd> Telescope oldfiles <cr>"),
         dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
-        dashboard.button("c", " " .. " Config", "<cmd> e $MYVIMRC <cr>"),
+        dashboard.button("c", " " .. " Config", "<cmd> e $MYVIMRC | cd %:p:h <cr>"),
         dashboard.button("s", " " .. " Restore Session", [[<cmd> so Session.vim <cr>]]),
         dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
         dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
@@ -58,6 +58,17 @@ return {
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
+
+      -- close Lazy and re-open when the dashboard is ready
+      if vim.o.filetype == "lazy" then
+        vim.cmd.close()
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "DashboardLoaded",
+          callback = function()
+            require("lazy").show()
+          end,
+        })
+      end
     end,
   },
 }

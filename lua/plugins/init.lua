@@ -1,6 +1,6 @@
 return {
   {
-    'romainl/vim-cool',
+    'junegunn/vim-slash',
     event = 'BufReadPost',
   },
 }

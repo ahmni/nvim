@@ -22,7 +22,6 @@ return {
       { 'L3MON4D3/LuaSnip' },
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-path' },
-      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
       { "onsails/lspkind.nvim" },
     },
     config = function()
@@ -43,7 +42,6 @@ return {
           {
             { name = 'path' },
             { name = 'nvim_lsp' },
-            { name = "nvim_lsp_signature_help" },
           },
           {
             { name = 'buffer' },
@@ -86,15 +84,15 @@ return {
       lsp.on_attach(function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
         -- esLint AutoFormatting
-        -- vim.api.nvim_create_autocmd("BufWritePre", {
-        --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-        --   command = "EslintFixAll",
-        -- })
-        -- Neoformat AutoFormatting
         vim.api.nvim_create_autocmd("BufWritePre", {
           pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-          command = "Neoformat",
+          command = "EslintFixAll",
         })
+        -- Neoformat AutoFormatting
+        -- vim.api.nvim_create_autocmd("BufWritePre", {
+        --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+        --   command = "Neoformat",
+        -- })
 
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
@@ -133,9 +131,10 @@ return {
             local lua_opts = lsp.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
           end,
+          jdtls = lsp.noop,
         }
       })
     end
   },
-  { 'mfussenegger/nvim-jdtls', event = 'BufRead *.java' },
+  { 'mfussenegger/nvim-jdtls', event = 'BufReadPre *.java' },
 }

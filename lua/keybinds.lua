@@ -23,9 +23,12 @@ vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 
 -- Buffers
 vim.keymap.set('n', '<leader>tn', '<cmd>tabnew %<CR>', { desc = "[T]ab [N]ew" })
-vim.keymap.set('n', '<leader>tf', ':tabnew ', { desc = "[T]ab New [F]ile" })
+vim.keymap.set('n', '<leader>te', '<cmd>Texplore<CR>', { desc = "[T]ab New [E]xplorer" })
+vim.keymap.set('n', '<leader>ts', '<cmd>Texplore<CR> <cmd> Telescope find_files <CR>', { desc = "[T]ab New [S]earch" })
 vim.keymap.set('n', '<leader>tc', '<cmd>tabc<CR>', { desc = "[T]ab [C]lose" })
 vim.keymap.set('n', '<leader>to', '<cmd>tabo<CR>', { desc = "[T]ab Close [O]thers" })
+vim.keymap.set('n', 'H', 'gt', { desc = "go to left tab" })
+vim.keymap.set('n', 'F', 'gT', { desc = "go to right tab" })
 
 -- remove trailing sapces on save
 --vim.api.nvim_create_autocmd({ "BufWritePre" }, {
