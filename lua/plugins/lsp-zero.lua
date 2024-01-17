@@ -1,17 +1,7 @@
 return {
   {
-    'VonHeikemen/lsp-zero.nvim',
-    config = false,
-    init = function()
-      -- Disable automatic setup, we are doing it manually
-      vim.g.lsp_zero_extend_cmp = 0
-      vim.g.lsp_zero_extend_lspconfig = 0
-      -- Allow noice to control float border
-      vim.g.lsp_zero_ui_float_border = 0
-    end
-  },
-  {
     'williamboman/mason.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     cmd = 'Mason',
     config = true
   },
@@ -25,8 +15,6 @@ return {
       { "onsails/lspkind.nvim" },
     },
     config = function()
-      local lsp = require('lsp-zero')
-      lsp.extend_cmp()
       local cmp = require('cmp')
 
       local lspkind = require('lspkind')
@@ -75,65 +63,90 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
-      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
     },
     config = function()
-      local lsp = require('lsp-zero')
-      lsp.extend_lspconfig()
+      local lsp = require('lspconfig')
+      lsp.tsserver.setup {}
+      lsp.eslint.setup {}
+      lsp.rust_analyzer.setup {}
+      lsp.clangd.setup {}
+      lsp.smithy_ls.setup {}
+      lsp.lua_ls.setup({
+        on_init = function(client)
+          local path = client.workspace_folders[1].name
+          if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+            client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+              Lua = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using
+                  -- (most likely LuaJIT in the case of Neovim)
+                  version = 'LuaJIT'
+                },
+                diagnostics = { globals = { "vim" } },
+                -- Make the server aware of Neovim runtime files
+                workspace = {
+                  checkThirdParty = false,
+                  library = {
+                    vim.env.VIMRUNTIME
+                    -- "${3rd}/luv/library"
+                    -- "${3rd}/busted/library",
+                  }
+                  -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                  -- library = vim.api.nvim_get_runtime_file("", true)
+                }
+              }
+            })
 
-      lsp.on_attach(function(client, bufnr)
-        local opts = { buffer = bufnr, remap = false }
-        -- esLint AutoFormatting
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-          command = "EslintFixAll",
-        })
-        -- Neoformat AutoFormatting
-        -- vim.api.nvim_create_autocmd("BufWritePre", {
-        --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-        --   command = "Neoformat",
-        -- })
-
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-        vim.keymap.set("n", "go", function() vim.lsp.buf.type_definition() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-        vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("i", "<C-CR>", function() vim.lsp.buf.signature_help() end, opts)
-        vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
-        vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-        -- disable semantic highlighting
-        -- client.server_capabilities.semanticTokensProvider = nil
-      end)
-
-      lsp.format_on_save({
-        format_opts = {
-          async = false,
-          timeout_ms = 10000,
-        },
-        servers = {
-          ['clangd'] = { 'cpp', 'c' },
-          ['lua_ls'] = { 'lua' },
-          ['rust_analyzer'] = { 'rust' },
-        }
+            client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+          end
+          return true
+        end
       })
 
-      require('mason-lspconfig').setup({
-        handlers = {
-          lsp.default_setup,
-          -- Fix undefined Globals
-          lua_ls = function()
-            local lua_opts = lsp.nvim_lua_ls()
-            require('lspconfig').lua_ls.setup(lua_opts)
-          end,
-          jdtls = lsp.noop,
-        }
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+        callback = function(ev)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = ev.buf,
+            callback = function()
+              if vim.bo.filetype == "typescriptreact" or vim.bo.filetype == "typescript" then
+                return
+              end
+              vim.lsp.buf.format {
+                async = false
+              }
+            end
+          })
+
+          -- esLint AutoFormatting
+          -- vim.api.nvim_create_autocmd("BufWritePre", {
+          --   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+          --   command = "EslintFixAll",
+          -- })
+          vim.keymap.set("n", "<leader>f", "<cmd>EslintFixAll<cr>")
+
+          -- Buffer local mappings.
+          -- See `:help vim.lsp.*` for documentation on any of the below functions
+          local opts = { buffer = ev.buf }
+
+          vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+          vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+          vim.keymap.set("n", "go", function() vim.lsp.buf.type_definition() end, opts)
+          vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+          vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
+          vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
+          vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+          vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+          vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+          vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+          vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+          vim.keymap.set("i", "<C-r>", function() vim.lsp.buf.signature_help() end, opts)
+          vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
+          vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+        end
       })
     end
   },
