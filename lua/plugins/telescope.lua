@@ -37,8 +37,6 @@ return {
         {
           mappings = {
             n = {
-              ['<C-k>'] = 'preview_scrolling_right',
-              ['<C-f>'] = 'preview_scrolling_left',
               ["<Tab>"] = require("telescope.actions").select_tab_drop
             },
             i = { ["<Tab>"] = require("telescope.actions").select_tab_drop }

@@ -6,10 +6,14 @@ return {
     config = true
   },
   {
+    'L3MON4D3/LuaSnip',
+    event = 'InsertEnter',
+    build = "make install_jsregexp",
+  },
+  {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-      { 'L3MON4D3/LuaSnip' },
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-path' },
       { "onsails/lspkind.nvim" },
@@ -70,7 +74,6 @@ return {
       lsp.eslint.setup {}
       lsp.rust_analyzer.setup {}
       lsp.clangd.setup {}
-      lsp.smithy_ls.setup {}
       lsp.lua_ls.setup({
         on_init = function(client)
           local path = client.workspace_folders[1].name
@@ -108,18 +111,8 @@ return {
         callback = function(ev)
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = ev.buf,
-            callback = function()
-              if vim.bo.filetype == "typescriptreact" or vim.bo.filetype == "typescript" then
-                return
-              end
-              vim.lsp.buf.format {
-                async = false
-              }
-            end
-          })
+          local client_id = ev.data.client_id
+          local client = vim.lsp.get_client_by_id(client_id)
 
           -- esLint AutoFormatting
           -- vim.api.nvim_create_autocmd("BufWritePre", {
@@ -146,6 +139,25 @@ return {
           vim.keymap.set("i", "<C-r>", function() vim.lsp.buf.signature_help() end, opts)
           vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
           vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+
+          if client.name == 'tsserver' or client.name == 'copilot' then
+            return
+          end
+
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = ev.buf,
+            callback = function()
+              if vim.bo.filetype == "typescriptreact" or vim.bo.filetype == "typescript" then
+                return
+              end
+              vim.lsp.buf.format {
+                async = false,
+                filter = function(c)
+                  return c.id == client.id
+                end
+              }
+            end
+          })
         end
       })
     end
