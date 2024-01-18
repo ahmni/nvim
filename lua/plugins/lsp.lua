@@ -68,7 +68,6 @@ return {
 		config = function()
 			local lsp = require("lspconfig")
 			lsp.tsserver.setup({})
-			lsp.eslint.setup({})
 			lsp.rust_analyzer.setup({})
 			lsp.clangd.setup({})
 			lsp.lua_ls.setup({
@@ -144,7 +143,6 @@ return {
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = ev.buf,
 						callback = function()
-							if vim.bo.filetype == "typescriptreact" or vim.bo.filetype == "typescript" then return end
 							vim.lsp.buf.format({
 								async = false,
 								filter = function(c) return c.id == client.id end,
@@ -168,6 +166,7 @@ return {
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.diagnostics.eslint_d,
 					null_ls.builtins.formatting.prettierd,
+					null_ls.builtins.formatting.eslint_d,
 				},
 			})
 		end,
