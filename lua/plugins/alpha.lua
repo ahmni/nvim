@@ -18,7 +18,6 @@ return {
         "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
         "                                                     ",
       }
-      -- stylua: ignore
       dashboard.section.buttons.val = {
         dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
         dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),

@@ -17,7 +17,7 @@ vim.loader.enable()
 
 local config = {
   defaults = {
-    lazy = true
+    lazy = true,
   },
   debug = false,
   profiling = {
@@ -26,7 +26,7 @@ local config = {
   },
 }
 
-require('set')
-require('keybinds')
+require("set")
+require("keybinds")
 
-require('lazy').setup('plugins', config)
+require("lazy").setup("plugins", config)
