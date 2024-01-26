@@ -68,7 +68,16 @@ return {
 		config = function()
 			local lsp = require("lspconfig")
 			lsp.tsserver.setup({})
-			lsp.rust_analyzer.setup({})
+			lsp.rust_analyzer.setup({
+				settings = {
+					["rust-analyzer"] = {
+						cargo = {
+							extraEnv = { CARGO_PROFILE_RUST_ANALYZER_INHERITS = "dev" },
+							extraArgs = { "--profile", "rust-analyzer" },
+						},
+					},
+				},
+			})
 			lsp.clangd.setup({})
 			lsp.lua_ls.setup({
 				on_init = function(client)
