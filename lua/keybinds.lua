@@ -18,6 +18,7 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<space>e", "<cmd>Explore<enter>", { desc = "open [E]xplorer" })
 
 vim.keymap.set("n", "<leader>w", "<cmd>update<CR>", { desc = "[W]rite file" })
+-- write without auto-format
 vim.cmd("command! W noa w")
 
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
