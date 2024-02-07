@@ -10,8 +10,7 @@ vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
 
-vim.keymap.set("n", "<leader>d", '"_d')
-vim.keymap.set("v", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>D", '"_d')
 
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[R]eplace Word " })
 
@@ -22,6 +21,20 @@ vim.keymap.set("n", "<leader>w", "<cmd>update<CR>", { desc = "[W]rite file" })
 vim.cmd("command! W noa w")
 
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
+
+-- LSP
+function toggle_virtual_lsp()
+	vim.g.virtual_lsp_active = not vim.g.virtual_lsp_active
+	vim.diagnostic.config({
+		virtual_text = vim.g.virtual_lsp_active,
+		underline = vim.g.virtual_lsp_active,
+	})
+end
+
+vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>lua toggle_virtual_lsp()<cr>", {
+	noremap = true,
+	silent = true,
+})
 
 -- Buffers
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnew %<CR>", { desc = "[T]ab [N]ew" })
