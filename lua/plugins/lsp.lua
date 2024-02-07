@@ -69,7 +69,9 @@ return {
 			require("neodev").setup()
 
 			local lsp = require("lspconfig")
-			lsp.tsserver.setup({})
+			lsp.tsserver.setup({
+				on_attach = function(_, _) vim.keymap.set("n", "<leader>f", "<cmd>EslintFixAll<cr>") end,
+			})
 			lsp.rust_analyzer.setup({
 				settings = {
 					["rust-analyzer"] = {
@@ -81,7 +83,8 @@ return {
 				},
 			})
 			lsp.clangd.setup({
-				cmd = { "clangd", "--background-index", "--clang-tidy", "--offset-encoding=utf-16" },
+				cmd = { "clangd", "--clang-tidy", "--offset-encoding=utf-16" },
+				on_attach = function(_, _) vim.keymap.set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>") end,
 			})
 			lsp.lua_ls.setup({
 				settings = {
@@ -141,7 +144,6 @@ return {
 					--   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
 					--   command = "EslintFixAll",
 					-- })
-					vim.keymap.set("n", "<leader>f", "<cmd>EslintFixAll<cr>")
 
 					-- Buffer local mappings.
 					-- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -154,7 +156,8 @@ return {
 					vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
 					vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
 					vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-					vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+					-- In favor of trouble references
+					-- vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
 					vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
 					vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
 					vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
