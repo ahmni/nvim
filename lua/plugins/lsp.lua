@@ -46,7 +46,7 @@ return {
 
 					-- Navigate between snippet placeholder
 					["<C-n>"] = cmp.mapping.select_next_item(),
-					["<C-b>"] = cmp.mapping.select_prev_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
 				},
 				formatting = {
 					format = lspkind.cmp_format({
@@ -69,9 +69,7 @@ return {
 			require("neodev").setup()
 
 			local lsp = require("lspconfig")
-			lsp.tsserver.setup({
-				on_attach = function(_, _) vim.keymap.set("n", "<leader>f", "<cmd>EslintFixAll<cr>") end,
-			})
+			lsp.tsserver.setup({})
 			lsp.rust_analyzer.setup({
 				settings = {
 					["rust-analyzer"] = {
@@ -81,6 +79,9 @@ return {
 						},
 					},
 				},
+			})
+			lsp.eslint.setup({
+				on_attach = function(_, _) vim.keymap.set("n", "<leader>f", "<cmd>EslintFixAll<cr>") end,
 			})
 			lsp.clangd.setup({
 				cmd = { "clangd", "--clang-tidy", "--offset-encoding=utf-16" },
@@ -97,38 +98,6 @@ return {
 						telemetry = { enable = false },
 					},
 				},
-
-				--	on_init = function(client)
-				--		local path = client.workspace_folders[1].name
-				--		if
-				--			not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc")
-				--		then
-				--			client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
-				--				Lua = {
-				--					runtime = {
-				--						-- Tell the language server which version of Lua you're using
-				--						-- (most likely LuaJIT in the case of Neovim)
-				--						version = "LuaJIT",
-				--					},
-				--					diagnostics = { globals = { "vim" } },
-				--					-- Make the server aware of Neovim runtime files
-				--					workspace = {
-				--						checkThirdParty = false,
-				--						library = {
-				--							vim.env.VIMRUNTIME,
-				--							-- "${3rd}/luv/library"
-				--							-- "${3rd}/busted/library",
-				--						},
-				--						-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-				--						-- library = vim.api.nvim_get_runtime_file("", true)
-				--					},
-				--				},
-				--			})
-
-				--			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-				--		end
-				--		return true
-				--	end,
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -138,6 +107,8 @@ return {
 					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 					local client_id = ev.data.client_id
 					local client = vim.lsp.get_client_by_id(client_id)
+
+					if client == nil then return end
 
 					-- esLint AutoFormatting
 					-- vim.api.nvim_create_autocmd("BufWritePre", {
@@ -165,11 +136,15 @@ return {
 					vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
 					vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
 
-					if client.name == "tsserver" or client.name == "copilot" then return end
+					-- use eslint for formatting instead
+					if client.name == "tsserver" then return end
+
+					if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(ev.buf, true) end
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = ev.buf,
 						callback = function()
+							if not client.supports_method("textDocument/formatting") then return end
 							vim.lsp.buf.format({
 								async = false,
 								filter = function(c) return c.id == client.id end,
@@ -191,9 +166,7 @@ return {
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.diagnostics.eslint_d,
 					null_ls.builtins.formatting.prettierd,
-					null_ls.builtins.formatting.eslint_d,
 					null_ls.builtins.formatting.clang_format,
 				},
 			})
