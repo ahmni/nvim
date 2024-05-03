@@ -1,44 +1,43 @@
 return {
   {
-    'nvim-lualine/lualine.nvim',
-    dependencies =
-    { 'nvim-tree/nvim-web-devicons', opt = true },
-    event = 'UIEnter',
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
+    event = "UIEnter",
     config = function()
       require("lualine").setup({
         options = {
-          theme = 'auto',
-          component_separators = '|',
-          section_separators = { left = '', right = '' },
+          theme = "auto",
+          component_separators = "|",
+          section_separators = { left = "", right = "" },
         },
         sections = {
           lualine_a = {
-            { 'mode', right_padding = 1 },
+            { "mode", right_padding = 1 },
           },
           lualine_b = {
-            'branch', 'diff', 'diagnostics'
+            "branch",
+            "diff",
+            "diagnostics",
           },
           lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
-              'filename',
+              "filename",
               path = 1,
               symbols = {
-                modified = '●', -- Text to show when the file is modified.
-                readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
-                unnamed = '', -- Text to show for unnamed buffers.
-                newfile = '[New]', -- Text to show for newly created file before first write
+                modified = "●", -- Text to show when the file is modified.
+                readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+                unnamed = "", -- Text to show for unnamed buffers.
+                newfile = "[New]", -- Text to show for newly created file before first write
               },
               fmt = function(str)
                 --- @type string
                 local fn = vim.fn.expand("%:~:.")
 
-                if vim.startswith(fn, "jdt://") then
-                  return fn:gsub("?.*$", "")
-                end
+                if vim.startswith(fn, "jdt://") then return fn:gsub("?.*$", "") end
                 return str
               end,
-            }
+            },
           },
           lualine_x = {
             {
@@ -46,7 +45,7 @@ return {
               cond = require("noice").api.status.command.has,
               color = { fg = "#f6c177" },
             },
-            'fileformat',
+            "fileformat",
           },
         },
         -- tabline = {
@@ -82,30 +81,30 @@ return {
         --   lualine_z = {}
         -- }
       })
-    end
+    end,
   },
   {
     {
-      'akinsho/bufferline.nvim',
-      event = 'BufRead',
-      dependencies = 'nvim-tree/nvim-web-devicons',
+      "akinsho/bufferline.nvim",
+      event = "BufRead",
+      dependencies = "nvim-tree/nvim-web-devicons",
       config = function()
-        require("bufferline").setup {
+        require("bufferline").setup({
           options = {
             mode = "tabs",
             always_show_bufferline = false,
             diagnostics = "nvim_lsp",
             diagnostics_indicator = function(count, level, _, context)
-              if context.buffer:current() then return '' end
+              if context.buffer:current() then return "" end
 
               local icon = level:match("error") and " " or " "
               return " " .. icon .. count
             end,
             separator_style = "slant",
-            close_icon = ""
-          }
-        }
+            close_icon = "",
+          },
+        })
       end,
-    }
-  }
+    },
+  },
 }

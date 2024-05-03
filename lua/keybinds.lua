@@ -24,16 +24,19 @@ vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
 
 -- LSP
 function toggle_virtual_lsp()
-	vim.g.virtual_lsp_active = not vim.g.virtual_lsp_active
-	vim.diagnostic.config({
-		virtual_text = vim.g.virtual_lsp_active,
-		underline = vim.g.virtual_lsp_active,
-	})
+  vim.g.virtual_lsp_active = not vim.g.virtual_lsp_active
+  vim.diagnostic.config({
+    virtual_text = vim.g.virtual_lsp_active,
+    underline = vim.g.virtual_lsp_active,
+  })
 end
 
-vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>lua toggle_virtual_lsp()<cr>", {
-	noremap = true,
-	silent = true,
+vim.keymap.set("n", "<leader>l", "<cmd>lua toggle_virtual_lsp()<cr>", {
+  silent = true,
+})
+
+vim.keymap.set("n", "<leader>vi", "<cmd>lua vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()) <cr>", {
+  silent = true,
 })
 
 -- Buffers
