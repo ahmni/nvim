@@ -139,7 +139,9 @@ return {
 					-- use eslint for formatting instead
 					if client.name == "tsserver" then return end
 
-					if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(ev.buf, true) end
+					if client.server_capabilities.inlayHintProvider then
+						vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+					end
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = ev.buf,
