@@ -69,7 +69,9 @@ return {
 			require("neodev").setup()
 
 			local lsp = require("lspconfig")
-			lsp.tsserver.setup({})
+			lsp.tsserver.setup({
+				documentFormattingProvider = false,
+			})
 			lsp.rust_analyzer.setup({
 				settings = {
 					["rust-analyzer"] = {
@@ -86,6 +88,7 @@ return {
 			lsp.clangd.setup({
 				cmd = { "clangd", "--clang-tidy", "--offset-encoding=utf-16" },
 				on_attach = function(_, _) vim.keymap.set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>") end,
+				filetypes = { "c", "cpp" },
 			})
 			lsp.lua_ls.setup({
 				settings = {
@@ -135,9 +138,6 @@ return {
 					vim.keymap.set("i", "<C-r>", function() vim.lsp.buf.signature_help() end, opts)
 					vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
 					vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-
-					-- use eslint for formatting instead
-					if client.name == "tsserver" then return end
 
 					if client.server_capabilities.inlayHintProvider then
 						vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
