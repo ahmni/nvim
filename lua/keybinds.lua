@@ -35,7 +35,7 @@ vim.keymap.set("n", "<leader>l", "<cmd>lua toggle_virtual_lsp()<cr>", {
   silent = true,
 })
 
-vim.keymap.set("n", "<leader>vi", "<cmd>lua vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()) <cr>", {
+vim.keymap.set("n", "<leader>vi", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) <cr>", {
   silent = true,
 })
 
