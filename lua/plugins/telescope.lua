@@ -41,14 +41,15 @@ return {
     { "<leader>sr", function() require("telescope.builtin").lsp_references() end, desc = "[S]earch [R]eferences" },
   },
   config = function()
+    local open_with_trouble = require("trouble.sources.telescope").open
     require("telescope").setup({
       defaults = vim.tbl_extend("force", require("telescope.themes").get_dropdown(), {
         path_display = { "truncate" },
         mappings = {
           n = {
-            ["<Tab>"] = require("telescope.actions").select_tab_drop,
+            ["<C-t>"] = open_with_trouble,
           },
-          i = { ["<Tab>"] = require("telescope.actions").select_tab_drop },
+          i = { ["<C-t>"] = open_with_trouble},
         },
       }),
     })
