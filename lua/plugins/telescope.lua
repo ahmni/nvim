@@ -43,6 +43,7 @@ return {
   config = function()
     require("telescope").setup({
       defaults = vim.tbl_extend("force", require("telescope.themes").get_dropdown(), {
+        path_display = { "truncate" },
         mappings = {
           n = {
             ["<Tab>"] = require("telescope.actions").select_tab_drop,
