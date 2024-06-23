@@ -198,7 +198,7 @@ local function jdtls_setup(event)
 				},
 			},
 			format = {
-				enabled = true,
+				enabled = false,
 				settings = {
 					url = "~/Netflix_GPS.xml",
 				},

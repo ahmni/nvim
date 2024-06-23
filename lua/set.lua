@@ -10,7 +10,7 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 
 -- search settings
-vim.opt.smartcase = true
+vim.opt.smartcase = true -- Note: to not ignore case, use /C after search
 vim.opt.ignorecase = true
 
 -- For EngineGoneRogue
