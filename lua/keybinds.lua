@@ -39,6 +39,11 @@ vim.keymap.set("n", "<leader>vi", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.ls
   silent = true,
 })
 
+vim.keymap.set("n", "<leader>oe", function()
+  local r, c = unpack(vim.api.nvim_win_get_cursor(0))
+  vim.cmd("!idea --line " .. r .. " --column " .. c .. " " .. vim.fn.expand("%"))
+end, { desc = "[O]pen [E]xternal editor", silent = true })
+
 -- Buffers
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnew %<CR>", { desc = "[T]ab [N]ew" })
 vim.keymap.set("n", "<leader>te", "<cmd>Texplore<CR>", { desc = "[T]ab New [E]xplorer" })

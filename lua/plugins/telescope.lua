@@ -39,6 +39,7 @@ return {
     { "<leader>sg", function() require("telescope.builtin").live_grep() end,      desc = "[S]earch by [G]rep" },
     { "<leader>sd", function() require("telescope.builtin").diagnostics() end,    desc = "[S]earch [D]iagnostics" },
     { "<leader>sr", function() require("telescope.builtin").lsp_references() end, desc = "[S]earch [R]eferences" },
+    { "<leader>sp", function() require("sg.extensions.telescope").fuzzy_search_results() end, desc = "Search code " },
   },
   config = function()
     local open_with_trouble = require("trouble.sources.telescope").open

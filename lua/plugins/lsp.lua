@@ -72,6 +72,14 @@ return {
 			lsp.tsserver.setup({
 				documentFormattingProvider = false,
 			})
+			lsp.groovyls.setup({
+				cmd = {
+					"java",
+					"-jar",
+					require("mason-registry").get_package("groovy-language-server"):get_install_path()
+						.. "/build/libs/groovy-language-server-all.jar",
+				},
+			})
 			lsp.rust_analyzer.setup({
 				settings = {
 					["rust-analyzer"] = {
@@ -131,13 +139,14 @@ return {
 					vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
 					vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 					-- In favor of trouble references
-					-- vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+					vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
 					vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
 					vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
 					vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
 					vim.keymap.set("i", "<C-r>", function() vim.lsp.buf.signature_help() end, opts)
 					vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
 					vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+					vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
 
 					if client.server_capabilities.inlayHintProvider then
 						vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
@@ -147,6 +156,7 @@ return {
 						buffer = ev.buf,
 						callback = function()
 							if not client.supports_method("textDocument/formatting") then return end
+							if client.name == "jdtls" or client.name == "tsserver" then return end
 							vim.lsp.buf.format({
 								async = false,
 								filter = function(c) return c.id == client.id end,
@@ -168,8 +178,8 @@ return {
 			null_ls.setup({
 				sources = {
 					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettierd,
-					null_ls.builtins.formatting.clang_format,
+					--null_ls.builtins.formatting.prettierd,
+					--null_ls.builtins.formatting.clang_format,
 				},
 			})
 		end,
