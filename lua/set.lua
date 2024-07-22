@@ -4,6 +4,7 @@ vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = true
 vim.opt.showcmd = true
 vim.opt.colorcolumn = "80"
 vim.opt.smartindent = true
@@ -15,14 +16,14 @@ vim.opt.ignorecase = true
 
 -- For EngineGoneRogue
 local SetTabWidth = function(num)
-	vim.opt.tabstop = num
-	vim.opt.shiftwidth = num
-	vim.opt.softtabstop = num
+  vim.opt.tabstop = num
+  vim.opt.shiftwidth = num
+  vim.opt.softtabstop = num
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "cpp", "java" },
-	callback = function() SetTabWidth(4) end,
+  pattern = { "cpp", "java" },
+  callback = function() SetTabWidth(4) end,
 })
 
 -- undotree
@@ -41,8 +42,8 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSig
 
 vim.g.virtual_lsp_active = false
 vim.diagnostic.config({
-	virtual_text = false,
-	underline = false,
+  virtual_text = false,
+  underline = false,
 })
 
 vim.opt.scrolloff = 8

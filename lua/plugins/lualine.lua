@@ -34,7 +34,7 @@ return {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
-              path = 1,
+              path = 4,
               symbols = {
                 modified = "●", -- Text to show when the file is modified.
                 readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
@@ -52,7 +52,7 @@ return {
             {
               symbols.get,
               cond = symbols.has,
-            }
+            },
           },
           lualine_x = {
             {
