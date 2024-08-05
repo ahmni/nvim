@@ -49,10 +49,10 @@ return {
                 return str
               end,
             },
-            {
-              symbols.get,
-              cond = symbols.has,
-            },
+            -- {
+            --   symbols.get,
+            --   cond = symbols.has,
+            -- },
           },
           lualine_x = {
             {
