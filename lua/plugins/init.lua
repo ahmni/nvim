@@ -17,10 +17,21 @@ return {
     event = "VeryLazy",
     config = function() require("nvim-surround").setup({}) end,
   },
-  -- Speedtyping minigame :)
-  -- {
-  -- 	"NStefan002/speedtyper.nvim",
-  -- 	cmd = "Speedtyper",
-  -- 	opts = {},
-  -- },
+  {
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
+    branch = "v0.6", --recommended as each new version will have breaking changes
+    opts = {
+      --Config goes here
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "BufRead",
+    opts = {
+      max_lines = 4,
+      multiline_threshold = 1,
+      mode = "topline",
+    },
+  },
 }

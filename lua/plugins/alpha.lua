@@ -40,6 +40,10 @@ return {
     end,
     config = function(_, dashboard)
       require("alpha").setup(dashboard.opts)
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "AlphaReady",
+        command = "set showtabline=0 | set laststatus=0",
+      })
 
       vim.api.nvim_create_autocmd("User", {
         once = true,
@@ -48,12 +52,12 @@ return {
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           dashboard.section.footer.val = "⚡ Neovim loaded "
-              .. stats.loaded
-              .. "/"
-              .. stats.count
-              .. " plugins in "
-              .. ms
-              .. "ms"
+            .. stats.loaded
+            .. "/"
+            .. stats.count
+            .. " plugins in "
+            .. ms
+            .. "ms"
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
@@ -63,9 +67,7 @@ return {
         vim.cmd.close()
         vim.api.nvim_create_autocmd("User", {
           pattern = "DashboardLoaded",
-          callback = function()
-            require("lazy").show()
-          end,
+          callback = function() require("lazy").show() end,
         })
       end
     end,

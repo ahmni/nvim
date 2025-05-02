@@ -2,7 +2,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
-    event = "UIEnter",
+    event = "BufRead",
     config = function()
       local trouble = require("trouble")
       local symbols = trouble.statusline({

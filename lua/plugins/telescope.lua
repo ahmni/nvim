@@ -30,14 +30,14 @@ return {
       end,
       desc = "[/] Fuzzily search in current buffer]",
     },
-    { "<leader>sf", function() require("telescope.builtin").find_files() end,     desc = "[S]earch [F]iles" },
-    { "<leader>sh", function() require("telescope.builtin").help_tags() end,      desc = "[S]earch [H]elp" },
-    { "<leader>sc", function() require("telescope.builtin").commands() end,       desc = "[S]earch [C]ommands" },
-    { "<leader>sw", function() require("telescope.builtin").grep_string() end,    desc = "[S]earch current [W]ord" },
-    { "<leader>sk", function() require("telescope.builtin").keymaps() end,        desc = "[S]earch [K]eybindings" },
-    { "<leader>sl", function() require("telescope.builtin").resume() end,         desc = "[S]earch [L]ast field" },
-    { "<leader>sg", function() require("telescope.builtin").live_grep() end,      desc = "[S]earch by [G]rep" },
-    { "<leader>sd", function() require("telescope.builtin").diagnostics() end,    desc = "[S]earch [D]iagnostics" },
+    { "<leader>sf", function() require("telescope.builtin").find_files() end, desc = "[S]earch [F]iles" },
+    { "<leader>sh", function() require("telescope.builtin").help_tags() end, desc = "[S]earch [H]elp" },
+    { "<leader>sc", function() require("telescope.builtin").commands() end, desc = "[S]earch [C]ommands" },
+    { "<leader>sw", function() require("telescope.builtin").grep_string() end, desc = "[S]earch current [W]ord" },
+    { "<leader>sk", function() require("telescope.builtin").keymaps() end, desc = "[S]earch [K]eybindings" },
+    { "<leader>sl", function() require("telescope.builtin").resume() end, desc = "[S]earch [L]ast field" },
+    { "<leader>sg", function() require("telescope.builtin").live_grep() end, desc = "[S]earch by [G]rep" },
+    { "<leader>sd", function() require("telescope.builtin").diagnostics() end, desc = "[S]earch [D]iagnostics" },
     { "<leader>sr", function() require("telescope.builtin").lsp_references() end, desc = "[S]earch [R]eferences" },
   },
   config = function()
@@ -49,12 +49,22 @@ return {
           n = {
             ["<C-t>"] = open_with_trouble,
           },
-          i = { ["<C-t>"] = open_with_trouble},
+          i = { ["<C-t>"] = open_with_trouble },
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+          },
         },
       }),
     })
 
     require("telescope").load_extension("recent_files")
     require("telescope").load_extension("ui-select")
+    require("telescope").load_extension("fzf")
   end,
 }

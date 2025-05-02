@@ -12,7 +12,10 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 
 vim.keymap.set("v", "<leader>D", '"_d')
 
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[R]eplace Word " })
+vim.keymap.set("n", "`", "^")
+vim.keymap.set("v", "`", "^")
+
+-- vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[R]eplace Word " })
 
 vim.keymap.set("n", "<space>e", "<cmd>Explore<enter>", { desc = "open [E]xplorer" })
 

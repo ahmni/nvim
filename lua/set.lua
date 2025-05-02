@@ -44,6 +44,14 @@ vim.g.virtual_lsp_active = false
 vim.diagnostic.config({
   virtual_text = false,
   underline = false,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+  },
 })
 
 vim.opt.scrolloff = 8
